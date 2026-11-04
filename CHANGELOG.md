@@ -16,8 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Verification and login UI views with Lucide vector iconography.
 - Architecture design documentation (`docs/savelo_idp_architecture_design.md`).
 - Semantic Versioning & Changelog maintenance guidelines (`docs/VERSIONING.md`).
-- GitHub Actions CI/CD workflows for PR quality checks, automated Vercel Preview deployments with PR commenting, and automated Vercel Production deployment on merge to `main`.
 - Pull Request template and CI/CD policy documentation (`docs/CICD.md`).
+- Monochromatic Black & White (B&W) design system inspired by enterprise cyber-defense aesthetics with zero neon colors and zero emojis.
+- Dynamic Dark/Light mode theme switcher powered by `useSyncExternalStore` and `localStorage`.
+- Developer Console UI (`/console`) and API (`/api/developer/apps`) for self-service OAuth client app registration with one-time secret display and `.env` generator.
+- Interactive Developer Documentation Portal (`/docs`) covering zero-password architecture, PKCE flow, and tabbed code snippets (TypeScript, cURL, Python).
+- Redesigned Enterprise Landing Page (`/`) with dual-tone outlined typography, 6-pillar security bento grid, and interactive workflow diagrams.
+- Re-themed login and verification screens (`/oauth/authorize`, `/verify`) with recessed monospace inputs and high-contrast styling.
 
 ### Fixed
 - Fixed TypeScript type error in `app/layout.tsx` by replacing undeclared `LayoutProps` with standard `Readonly<{ children: React.ReactNode }>`.

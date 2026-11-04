@@ -13,9 +13,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Savelo Identity Provider",
-  description: "Centralized Zero-Password OAuth 2.0 / OIDC Identity Provider",
+  title: "Savelo Identity Provider | Zero-Password OAuth 2.0 & OIDC",
+  description: "Centralized, enterprise-grade zero-password identity provider with PKCE, RS256 JWT, and refresh token rotation.",
 };
+
+const themeScript = `
+  (function() {
+    try {
+      var savedTheme = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else if (savedTheme === 'dark' || prefersDark || !savedTheme) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  })();
+`;
 
 export default function RootLayout({
   children,
@@ -25,9 +39,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="min-h-full flex flex-col bg-[#ffffff] dark:bg-[#080809] text-zinc-900 dark:text-zinc-100 transition-colors duration-200">
+        {children}
+      </body>
     </html>
   );
 }

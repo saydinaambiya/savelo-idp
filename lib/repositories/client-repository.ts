@@ -50,6 +50,44 @@ export class ClientRepository {
       },
     });
   }
+
+  /**
+   * List all registered client applications ordered by creation date.
+   */
+  async listAll(): Promise<Omit<ClientApp, "clientSecret">[]> {
+    return prisma.clientApp.findMany({
+      select: {
+        id: true,
+        name: true,
+        clientId: true,
+        redirectUris: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+      orderBy: { createdAt: "desc" },
+    });
+  }
+
+  /**
+   * Create a new client application with hashed secret.
+   */
+  async createClient(data: {
+    name: string;
+    clientId: string;
+    rawSecret: string;
+    redirectUris: string[];
+  }): Promise<ClientApp> {
+    const hashedSecret = hashToken(data.rawSecret);
+
+    return prisma.clientApp.create({
+      data: {
+        name: data.name,
+        clientId: data.clientId,
+        clientSecret: hashedSecret,
+        redirectUris: data.redirectUris,
+      },
+    });
+  }
 }
 
 export const clientRepository = new ClientRepository();
