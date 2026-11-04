@@ -108,17 +108,17 @@ async def exchange_token(auth_code: str, pkce_verifier: str):
             <span className="text-stroke font-black">INTEGRATION</span>{" "}
             <span className="text-black dark:text-white">GUIDELINES</span>
           </h1>
-          <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
-            Everything you need to integrate Savelo Identity Provider (IdP) with your web applications, APIs, and microservices.
+          <p className="mt-2 text-xs font-mono text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
+            Integration protocols and specifications for Savelo Identity Provider (IdP) authentication.
           </p>
 
           <div className="mt-4 flex flex-wrap items-center gap-3">
             <Link
               href="/console"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold uppercase tracking-wider bg-black text-white dark:bg-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium bg-black text-white dark:bg-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition"
             >
               <KeyRound className="w-3.5 h-3.5" />
-              <span>Register App in Console</span>
+              <span>Console</span>
             </Link>
             <a
               href="/api/.well-known/openid-configuration"
@@ -134,26 +134,26 @@ async def exchange_token(auth_code: str, pkce_verifier: str):
 
         {/* 3-Column Layout: Navigation, Content, Code */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 my-10">
-          {/* Left Sticky Index */}
+          {/* Left Sticky Index (Pure JetBrains Mono) */}
           <aside className="lg:col-span-1 space-y-4">
             <div className="sticky top-24 p-4 rounded-xl border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121316] text-xs font-mono space-y-2.5">
-              <span className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold block mb-2">
-                Document Sections
+              <span className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold block mb-2 font-mono">
+                Index
               </span>
-              <a href="#overview" className="block text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition">
-                1. Overview & Architecture
+              <a href="#overview" className="block text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition font-mono">
+                01. Overview
               </a>
-              <a href="#client-registration" className="block text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition">
-                2. Client App Registration
+              <a href="#client-registration" className="block text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition font-mono">
+                02. Client Registration
               </a>
-              <a href="#auth-flow" className="block text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition">
-                3. PKCE Authorization Flow
+              <a href="#auth-flow" className="block text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition font-mono">
+                03. PKCE Authorization Flow
               </a>
-              <a href="#token-exchange" className="block text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition">
-                4. Token Exchange & Rotation
+              <a href="#token-exchange" className="block text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition font-mono">
+                04. Token Exchange
               </a>
-              <a href="#endpoints" className="block text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition">
-                5. Standard Endpoints
+              <a href="#endpoints" className="block text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition font-mono">
+                05. Endpoints
               </a>
             </div>
           </aside>
@@ -164,29 +164,29 @@ async def exchange_token(auth_code: str, pkce_verifier: str):
             <section id="overview" className="space-y-4">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-zinc-500" />
-                <h2 className="text-xl font-bold uppercase tracking-wider text-black dark:text-white">
+                <h2 className="text-lg font-bold uppercase tracking-wider text-black dark:text-white">
                   1. Overview & Architecture
                 </h2>
               </div>
-              <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+              <p className="text-xs font-mono text-zinc-600 dark:text-zinc-400 leading-relaxed">
                 Savelo IdP eliminates passwords entirely using a cryptographic dual-channel mechanism:
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
                 <div className="p-4 rounded-xl border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121316] space-y-1">
-                  <div className="font-bold text-black dark:text-white">Zero-Password Authentication</div>
-                  <p className="text-zinc-500 text-[11px]">
+                  <div className="font-bold text-black dark:text-white font-mono text-xs">Zero-Password Authentication</div>
+                  <p className="text-zinc-500 text-[11px] font-mono leading-relaxed">
                     Users login via 6-digit CSPRNG numeric OTP (salted with HMAC-SHA256) or Magic Links.
                   </p>
                 </div>
                 <div className="p-4 rounded-xl border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121316] space-y-1">
-                  <div className="font-bold text-black dark:text-white">Cross-Device SSE Sync</div>
-                  <p className="text-zinc-500 text-[11px]">
+                  <div className="font-bold text-black dark:text-white font-mono text-xs">Cross-Device SSE Sync</div>
+                  <p className="text-zinc-500 text-[11px] font-mono leading-relaxed">
                     Confirming a login on a secondary mobile device triggers instant push to the initiating desktop via Redis SSE.
                   </p>
                 </div>
                 <div className="p-4 rounded-xl border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121316] space-y-1">
-                  <div className="font-bold text-black dark:text-white">OIDC & PKCE S256</div>
-                  <p className="text-zinc-500 text-[11px]">
+                  <div className="font-bold text-black dark:text-white font-mono text-xs">OIDC & PKCE S256</div>
+                  <p className="text-zinc-500 text-[11px] font-mono leading-relaxed">
                     Strict RFC 7636 PKCE code challenges mitigate authorization code interception attacks.
                   </p>
                 </div>
@@ -197,26 +197,26 @@ async def exchange_token(auth_code: str, pkce_verifier: str):
             <section id="client-registration" className="space-y-4">
               <div className="flex items-center gap-2">
                 <KeyRound className="w-5 h-5 text-zinc-500" />
-                <h2 className="text-xl font-bold uppercase tracking-wider text-black dark:text-white">
-                  2. Client App Registration
+                <h2 className="text-lg font-bold uppercase tracking-wider text-black dark:text-white">
+                  2. Client Registration
                 </h2>
               </div>
-              <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                Before your service can authenticate users, you must register your application in the{" "}
+              <p className="text-xs font-mono text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Before your service can authenticate users, provision your application in the{" "}
                 <Link href="/console" className="font-semibold underline text-black dark:text-white">
                   Developer Console
                 </Link>
                 :
               </p>
-              <ol className="list-decimal list-inside space-y-2 text-xs text-zinc-600 dark:text-zinc-400 font-mono">
+              <ol className="list-decimal list-inside space-y-2 text-xs text-zinc-600 dark:text-zinc-400 font-mono leading-relaxed">
                 <li>
-                  Open the Developer Console and click <strong>&quot;Register New Application&quot;</strong>.
+                  Open the Developer Console and click <strong>&quot;Register Application&quot;</strong>.
                 </li>
-                <li>Enter your service name (e.g. <code>Saveroute Production</code>) and whitelisted callback URLs.</li>
+                <li>Enter your service name (e.g. <code>Saveroute API</code>) and whitelisted callback URLs.</li>
                 <li>
                   Copy your <strong>Client ID</strong> and <strong>Client Secret</strong>. The secret is hashed with SHA-256 and will never be shown again.
                 </li>
-                <li>Store credentials in your service&apos;s environment variables.</li>
+                <li>Store credentials in your service environment variables.</li>
               </ol>
             </section>
 
@@ -224,28 +224,28 @@ async def exchange_token(auth_code: str, pkce_verifier: str):
             <section id="auth-flow" className="space-y-4">
               <div className="flex items-center gap-2">
                 <Lock className="w-5 h-5 text-zinc-500" />
-                <h2 className="text-xl font-bold uppercase tracking-wider text-black dark:text-white">
+                <h2 className="text-lg font-bold uppercase tracking-wider text-black dark:text-white">
                   3. PKCE Authorization Flow
                 </h2>
               </div>
-              <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                When a user clicks &quot;Sign in with Savelo&quot; in your application, redirect them to the authorization endpoint:
+              <p className="text-xs font-mono text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                When a user initiates authentication, redirect them to the authorization endpoint:
               </p>
 
               {/* Code Box */}
               <div className="rounded-xl border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-black overflow-hidden font-mono text-xs">
-                <div className="px-4 py-2 border-b border-zinc-200 dark:border-white/10 flex items-center justify-between text-[11px] text-zinc-500">
+                <div className="px-4 py-2 border-b border-zinc-200 dark:border-white/10 flex items-center justify-between text-[11px] text-zinc-500 font-mono">
                   <span>GET /oauth/authorize</span>
                   <button
                     type="button"
                     onClick={() => handleCopy(curlAuthorizeExample, "curl-auth")}
-                    className="flex items-center gap-1 hover:text-black dark:hover:text-white"
+                    className="flex items-center gap-1 hover:text-black dark:hover:text-white font-mono"
                   >
                     {copiedKey === "curl-auth" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                     <span>{copiedKey === "curl-auth" ? "Copied" : "Copy"}</span>
                   </button>
                 </div>
-                <pre className="p-4 overflow-x-auto text-zinc-800 dark:text-zinc-200 leading-relaxed">
+                <pre className="p-4 overflow-x-auto text-zinc-800 dark:text-zinc-200 leading-relaxed font-mono">
                   {curlAuthorizeExample}
                 </pre>
               </div>
@@ -255,24 +255,24 @@ async def exchange_token(auth_code: str, pkce_verifier: str):
             <section id="token-exchange" className="space-y-4">
               <div className="flex items-center gap-2">
                 <Terminal className="w-5 h-5 text-zinc-500" />
-                <h2 className="text-xl font-bold uppercase tracking-wider text-black dark:text-white">
-                  4. Token Exchange & Code Snippets
+                <h2 className="text-lg font-bold uppercase tracking-wider text-black dark:text-white">
+                  4. Token Exchange & Rotation
                 </h2>
               </div>
-              <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+              <p className="text-xs font-mono text-zinc-600 dark:text-zinc-400 leading-relaxed">
                 Upon completing verification, Savelo IdP redirects back to your callback URL with an <code>authorization_code</code>. Exchange this code for tokens at <code>POST /api/oauth/token</code>:
               </p>
 
               {/* Code Snippet Tabs */}
               <div className="rounded-xl border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-black overflow-hidden font-mono text-xs">
-                <div className="px-4 py-2 border-b border-zinc-200 dark:border-white/10 flex items-center justify-between">
+                <div className="px-4 py-2 border-b border-zinc-200 dark:border-white/10 flex items-center justify-between font-mono">
                   <div className="flex items-center gap-2">
                     {(["typescript", "curl", "python"] as const).map((tab) => (
                       <button
                         key={tab}
                         type="button"
                         onClick={() => setActiveSnippetTab(tab)}
-                        className={`px-2.5 py-1 rounded-md text-[11px] uppercase tracking-wider transition ${
+                        className={`px-2.5 py-1 rounded-md text-[11px] uppercase tracking-wider transition font-mono ${
                           activeSnippetTab === tab
                             ? "bg-black text-white dark:bg-white dark:text-black font-bold"
                             : "text-zinc-500 hover:text-black dark:hover:text-white"
@@ -294,14 +294,14 @@ async def exchange_token(auth_code: str, pkce_verifier: str):
                           : pythonSnippet;
                       handleCopy(snippet, "tabbed-snippet");
                     }}
-                    className="flex items-center gap-1 text-[11px] text-zinc-500 hover:text-black dark:hover:text-white"
+                    className="flex items-center gap-1 text-[11px] text-zinc-500 hover:text-black dark:hover:text-white font-mono"
                   >
                     {copiedKey === "tabbed-snippet" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                     <span>{copiedKey === "tabbed-snippet" ? "Copied" : "Copy"}</span>
                   </button>
                 </div>
 
-                <pre className="p-4 overflow-x-auto text-zinc-800 dark:text-zinc-200 leading-relaxed text-[11px]">
+                <pre className="p-4 overflow-x-auto text-zinc-800 dark:text-zinc-200 leading-relaxed text-[11px] font-mono">
                   {activeSnippetTab === "typescript" && tsExchangeSnippet}
                   {activeSnippetTab === "curl" && curlTokenExchangeExample}
                   {activeSnippetTab === "python" && pythonSnippet}
@@ -313,60 +313,60 @@ async def exchange_token(auth_code: str, pkce_verifier: str):
             <section id="endpoints" className="space-y-4">
               <div className="flex items-center gap-2">
                 <Layers className="w-5 h-5 text-zinc-500" />
-                <h2 className="text-xl font-bold uppercase tracking-wider text-black dark:text-white">
+                <h2 className="text-lg font-bold uppercase tracking-wider text-black dark:text-white">
                   5. Standard Endpoints Reference
                 </h2>
               </div>
               <div className="border border-zinc-200 dark:border-white/10 rounded-xl overflow-hidden font-mono text-xs">
                 <div className="divide-y divide-zinc-200 dark:divide-white/10">
                   <div className="p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-zinc-50 dark:bg-[#121316]">
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded bg-zinc-200 dark:bg-white/15 text-[10px] font-bold">
+                    <div className="flex items-center gap-2 font-mono">
+                      <span className="px-2 py-0.5 rounded bg-zinc-200 dark:bg-white/15 text-[10px] font-bold font-mono">
                         GET
                       </span>
-                      <code className="text-black dark:text-white">/api/.well-known/openid-configuration</code>
+                      <code className="text-black dark:text-white font-mono">/api/.well-known/openid-configuration</code>
                     </div>
-                    <span className="text-[11px] text-zinc-500">Auto-discovery document for OIDC clients</span>
+                    <span className="text-[11px] text-zinc-500 font-mono">Discovery document for OIDC clients</span>
                   </div>
 
                   <div className="p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded bg-zinc-200 dark:bg-white/15 text-[10px] font-bold">
+                    <div className="flex items-center gap-2 font-mono">
+                      <span className="px-2 py-0.5 rounded bg-zinc-200 dark:bg-white/15 text-[10px] font-bold font-mono">
                         GET
                       </span>
-                      <code className="text-black dark:text-white">/api/.well-known/jwks.json</code>
+                      <code className="text-black dark:text-white font-mono">/api/.well-known/jwks.json</code>
                     </div>
-                    <span className="text-[11px] text-zinc-500">Public RS256 RSA keys for JWT verification</span>
+                    <span className="text-[11px] text-zinc-500 font-mono">Public RS256 RSA keys for JWT verification</span>
                   </div>
 
                   <div className="p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-zinc-50 dark:bg-[#121316]">
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded bg-zinc-200 dark:bg-white/15 text-[10px] font-bold">
+                    <div className="flex items-center gap-2 font-mono">
+                      <span className="px-2 py-0.5 rounded bg-zinc-200 dark:bg-white/15 text-[10px] font-bold font-mono">
                         POST
                       </span>
-                      <code className="text-black dark:text-white">/api/oauth/token</code>
+                      <code className="text-black dark:text-white font-mono">/api/oauth/token</code>
                     </div>
-                    <span className="text-[11px] text-zinc-500">Authorization code & refresh token exchange</span>
+                    <span className="text-[11px] text-zinc-500 font-mono">Authorization code & refresh token exchange</span>
                   </div>
 
                   <div className="p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded bg-zinc-200 dark:bg-white/15 text-[10px] font-bold">
+                    <div className="flex items-center gap-2 font-mono">
+                      <span className="px-2 py-0.5 rounded bg-zinc-200 dark:bg-white/15 text-[10px] font-bold font-mono">
                         GET
                       </span>
-                      <code className="text-black dark:text-white">/api/oauth/userinfo</code>
+                      <code className="text-black dark:text-white font-mono">/api/oauth/userinfo</code>
                     </div>
-                    <span className="text-[11px] text-zinc-500">User profile claims (requires Bearer token)</span>
+                    <span className="text-[11px] text-zinc-500 font-mono">User profile claims (requires Bearer token)</span>
                   </div>
 
                   <div className="p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-zinc-50 dark:bg-[#121316]">
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded bg-zinc-200 dark:bg-white/15 text-[10px] font-bold">
+                    <div className="flex items-center gap-2 font-mono">
+                      <span className="px-2 py-0.5 rounded bg-zinc-200 dark:bg-white/15 text-[10px] font-bold font-mono">
                         POST
                       </span>
-                      <code className="text-black dark:text-white">/api/oauth/revoke</code>
+                      <code className="text-black dark:text-white font-mono">/api/oauth/revoke</code>
                     </div>
-                    <span className="text-[11px] text-zinc-500">Revoke active sessions and token families</span>
+                    <span className="text-[11px] text-zinc-500 font-mono">Revoke active sessions and token families</span>
                   </div>
                 </div>
               </div>

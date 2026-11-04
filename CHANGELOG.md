@@ -21,8 +21,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dynamic Dark/Light mode theme switcher powered by `useSyncExternalStore` and `localStorage`.
 - Developer Console UI (`/console`) and API (`/api/developer/apps`) for self-service OAuth client app registration with one-time secret display and `.env` generator.
 - Interactive Developer Documentation Portal (`/docs`) covering zero-password architecture, PKCE flow, and tabbed code snippets (TypeScript, cURL, Python).
-- Redesigned Enterprise Landing Page (`/`) with dual-tone outlined typography, 6-pillar security bento grid, and interactive workflow diagrams.
 - Re-themed login and verification screens (`/oauth/authorize`, `/verify`) with recessed monospace inputs and high-contrast styling.
+
+### Changed
+- Refined Navbar: removed verbose versioning badge and replaced generic buttons with clean, restrained enterprise actions.
+- Cleaned Hero section: removed artificial appliance box and marketing tips in favor of spacious, authoritative typography.
+- Standardized Lifecycle section cards with vector icons, removing sequential numbers.
+- Streamlined Footer to eliminate marketing buzzwords.
+- Applied JetBrains Mono font for documentation descriptions, code specs, and navigation indexes.
+- Upgraded Developer Console into an interactive PKCE Auth Sandbox and Token Exchange Playground, removing public client credential listings.
 
 ### Fixed
 - Fixed TypeScript type error in `app/layout.tsx` by replacing undeclared `LayoutProps` with standard `Readonly<{ children: React.ReactNode }>`.
