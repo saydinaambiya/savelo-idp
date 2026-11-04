@@ -66,7 +66,6 @@ export default function DeveloperConsolePage() {
   };
 
   const handleRegeneratePkce = async () => {
-    // Generate 43 random characters
     const array = new Uint8Array(32);
     crypto.getRandomValues(array);
     const verifier = Array.from(array)
@@ -74,7 +73,6 @@ export default function DeveloperConsolePage() {
       .join("")
       .slice(0, 43);
 
-    // Compute S256 Challenge
     const encoder = new TextEncoder();
     const data = encoder.encode(verifier);
     const hash = await crypto.subtle.digest("SHA-256", data);
@@ -195,7 +193,7 @@ export default function DeveloperConsolePage() {
         <div className="pb-8 border-b border-zinc-200 dark:border-white/10">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight font-sans">
                 <span className="text-stroke font-black">DEVELOPER</span>{" "}
                 <span className="text-black dark:text-white">CONSOLE</span>
               </h1>
@@ -204,14 +202,14 @@ export default function DeveloperConsolePage() {
               </p>
             </div>
 
-            {/* Tab Controls */}
-            <div className="flex items-center gap-1.5 p-1 rounded-lg border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121316] font-mono text-xs">
+            {/* Tab Controls: Standard Font-Sans */}
+            <div className="flex items-center gap-1.5 p-1 rounded-lg border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121316]">
               <button
                 type="button"
                 onClick={() => setActiveTab("playground")}
-                className={`px-3 py-1.5 rounded-md transition ${
+                className={`px-3.5 py-1.5 rounded-md text-xs font-bold font-sans uppercase tracking-wider transition cursor-pointer ${
                   activeTab === "playground"
-                    ? "bg-black text-white dark:bg-white dark:text-black font-semibold"
+                    ? "bg-black text-white dark:bg-white dark:text-black"
                     : "text-zinc-500 hover:text-black dark:hover:text-white"
                 }`}
               >
@@ -220,9 +218,9 @@ export default function DeveloperConsolePage() {
               <button
                 type="button"
                 onClick={() => setActiveTab("register")}
-                className={`px-3 py-1.5 rounded-md transition ${
+                className={`px-3.5 py-1.5 rounded-md text-xs font-bold font-sans uppercase tracking-wider transition cursor-pointer ${
                   activeTab === "register"
-                    ? "bg-black text-white dark:bg-white dark:text-black font-semibold"
+                    ? "bg-black text-white dark:bg-white dark:text-black"
                     : "text-zinc-500 hover:text-black dark:hover:text-white"
                 }`}
               >
@@ -239,22 +237,22 @@ export default function DeveloperConsolePage() {
             <div className="p-6 rounded-2xl border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121316] space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-white/10">
                 <div>
-                  <h2 className="text-base font-bold text-black dark:text-white flex items-center gap-2">
+                  <h2 className="text-base font-bold text-black dark:text-white flex items-center gap-2 font-sans">
                     <Shield className="w-4 h-4 text-zinc-500" />
-                    <span>1. Target Client Credentials</span>
+                    <span>Target Client Credentials</span>
                   </h2>
                   <p className="text-xs font-mono text-zinc-500 mt-0.5">
                     Choose the pre-seeded sandbox client or test your own registered credentials.
                   </p>
                 </div>
 
-                <div className="flex items-center gap-1.5 font-mono text-xs">
+                <div className="flex items-center gap-2">
                   <button
                     type="button"
                     onClick={() => setClientMode("demo")}
-                    className={`px-3 py-1.5 rounded-md border transition ${
+                    className={`px-3.5 py-1.5 rounded-md border text-xs font-bold font-sans uppercase tracking-wider transition cursor-pointer ${
                       clientMode === "demo"
-                        ? "bg-black text-white dark:bg-white dark:text-black border-transparent font-semibold"
+                        ? "bg-black text-white dark:bg-white dark:text-black border-transparent"
                         : "border-zinc-300 dark:border-white/10 text-zinc-500 hover:text-black dark:hover:text-white"
                     }`}
                   >
@@ -263,9 +261,9 @@ export default function DeveloperConsolePage() {
                   <button
                     type="button"
                     onClick={() => setClientMode("custom")}
-                    className={`px-3 py-1.5 rounded-md border transition ${
+                    className={`px-3.5 py-1.5 rounded-md border text-xs font-bold font-sans uppercase tracking-wider transition cursor-pointer ${
                       clientMode === "custom"
-                        ? "bg-black text-white dark:bg-white dark:text-black border-transparent font-semibold"
+                        ? "bg-black text-white dark:bg-white dark:text-black border-transparent"
                         : "border-zinc-300 dark:border-white/10 text-zinc-500 hover:text-black dark:hover:text-white"
                     }`}
                   >
@@ -283,7 +281,7 @@ export default function DeveloperConsolePage() {
                       placeholder="e.g. saveroute-web-1234"
                       value={customClientId}
                       onChange={(e) => setCustomClientId(e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-white/10 bg-white dark:bg-black/60 text-zinc-900 dark:text-zinc-100"
+                      className="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-white/10 bg-white dark:bg-black/60 text-zinc-900 dark:text-zinc-100 font-mono"
                     />
                   </div>
                   <div>
@@ -293,7 +291,7 @@ export default function DeveloperConsolePage() {
                       placeholder="savelo_sec_..."
                       value={customClientSecret}
                       onChange={(e) => setCustomClientSecret(e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-white/10 bg-white dark:bg-black/60 text-zinc-900 dark:text-zinc-100"
+                      className="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-white/10 bg-white dark:bg-black/60 text-zinc-900 dark:text-zinc-100 font-mono"
                     />
                   </div>
                   <div>
@@ -303,7 +301,7 @@ export default function DeveloperConsolePage() {
                       placeholder="http://localhost:3000/api/auth/callback"
                       value={customRedirectUri}
                       onChange={(e) => setCustomRedirectUri(e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-white/10 bg-white dark:bg-black/60 text-zinc-900 dark:text-zinc-100"
+                      className="w-full px-3 py-2 rounded-lg border border-zinc-300 dark:border-white/10 bg-white dark:bg-black/60 text-zinc-900 dark:text-zinc-100 font-mono"
                     />
                   </div>
                 </div>
@@ -331,9 +329,9 @@ export default function DeveloperConsolePage() {
             <div className="p-6 rounded-2xl border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121316] space-y-5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-white/10">
                 <div>
-                  <h2 className="text-base font-bold text-black dark:text-white flex items-center gap-2">
+                  <h2 className="text-base font-bold text-black dark:text-white flex items-center gap-2 font-sans">
                     <Lock className="w-4 h-4 text-zinc-500" />
-                    <span>2. PKCE Parameters & Authorization Trigger</span>
+                    <span>PKCE Parameters & Authorization Trigger</span>
                   </h2>
                   <p className="text-xs font-mono text-zinc-500 mt-0.5">
                     Real-time S256 code challenge generation and simulated browser redirection.
@@ -343,7 +341,7 @@ export default function DeveloperConsolePage() {
                 <button
                   type="button"
                   onClick={handleRegeneratePkce}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-zinc-300 dark:border-white/10 text-xs font-mono text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white transition"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg border border-zinc-300 dark:border-white/15 text-xs font-bold font-sans uppercase tracking-wider text-black dark:text-white hover:bg-zinc-100 dark:hover:bg-white/10 transition cursor-pointer"
                 >
                   <RotateCw className="w-3.5 h-3.5" />
                   <span>Regenerate PKCE</span>
@@ -360,7 +358,7 @@ export default function DeveloperConsolePage() {
                     <button
                       type="button"
                       onClick={() => handleCopy(codeVerifier, "code-verifier")}
-                      className="p-1 text-zinc-400 hover:text-black dark:hover:text-white ml-2"
+                      className="p-1 text-zinc-400 hover:text-black dark:hover:text-white ml-2 cursor-pointer"
                     >
                       {copiedKey === "code-verifier" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
@@ -376,7 +374,7 @@ export default function DeveloperConsolePage() {
                     <button
                       type="button"
                       onClick={() => handleCopy(codeChallenge, "code-challenge")}
-                      className="p-1 text-zinc-400 hover:text-black dark:hover:text-white ml-2"
+                      className="p-1 text-zinc-400 hover:text-black dark:hover:text-white ml-2 cursor-pointer"
                     >
                       {copiedKey === "code-challenge" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
@@ -397,7 +395,7 @@ export default function DeveloperConsolePage() {
                   href={authUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold uppercase tracking-wider bg-black text-white dark:bg-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-bold font-sans uppercase tracking-wider bg-black text-white dark:bg-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition cursor-pointer"
                 >
                   <Play className="w-3.5 h-3.5 fill-current" />
                   <span>Launch Login Simulation in New Window</span>
@@ -409,9 +407,9 @@ export default function DeveloperConsolePage() {
             {/* Step 3: Token Exchange Tester */}
             <div className="p-6 rounded-2xl border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121316] space-y-5">
               <div className="pb-4 border-b border-zinc-200 dark:border-white/10">
-                <h2 className="text-base font-bold text-black dark:text-white flex items-center gap-2">
+                <h2 className="text-base font-bold text-black dark:text-white flex items-center gap-2 font-sans">
                   <Terminal className="w-4 h-4 text-zinc-500" />
-                  <span>3. Authorization Code to Token Exchange Tester</span>
+                  <span>Authorization Code to Token Exchange Tester</span>
                 </h2>
                 <p className="text-xs font-mono text-zinc-500 mt-0.5">
                   Paste the authorization code received from the callback query string to test POST /api/oauth/token.
@@ -442,7 +440,7 @@ export default function DeveloperConsolePage() {
                 <button
                   type="submit"
                   disabled={tokenExchanging || !authCodeInput.trim()}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider bg-black text-white dark:bg-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 disabled:opacity-50 transition flex items-center gap-2"
+                  className="px-5 py-2.5 rounded-lg text-xs font-bold font-sans uppercase tracking-wider bg-black text-white dark:bg-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 disabled:opacity-50 transition flex items-center gap-2 cursor-pointer"
                 >
                   {tokenExchanging ? (
                     <>
@@ -463,7 +461,7 @@ export default function DeveloperConsolePage() {
                     <button
                       type="button"
                       onClick={() => handleCopy(JSON.stringify(tokenResult, null, 2), "token-result")}
-                      className="hover:text-black dark:hover:text-white flex items-center gap-1"
+                      className="hover:text-black dark:hover:text-white flex items-center gap-1 cursor-pointer font-mono"
                     >
                       {copiedKey === "token-result" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                       <span>Copy JSON</span>
@@ -483,7 +481,7 @@ export default function DeveloperConsolePage() {
           <div className="my-8 max-w-2xl mx-auto">
             <div className="p-8 rounded-2xl border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121316] space-y-6">
               <div>
-                <h2 className="text-lg font-bold text-black dark:text-white flex items-center gap-2">
+                <h2 className="text-lg font-bold text-black dark:text-white flex items-center gap-2 font-sans">
                   <KeyRound className="w-5 h-5 text-zinc-500" />
                   <span>Register Client Application</span>
                 </h2>
@@ -500,7 +498,7 @@ export default function DeveloperConsolePage() {
 
               <form onSubmit={handleRegisterClient} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5">
+                  <label className="block text-xs font-bold font-sans uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5">
                     Application Name
                   </label>
                   <input
@@ -515,13 +513,13 @@ export default function DeveloperConsolePage() {
 
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
+                    <label className="text-xs font-bold font-sans uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
                       Callback / Redirect URIs
                     </label>
                     <button
                       type="button"
                       onClick={handleAddUri}
-                      className="text-xs text-zinc-500 hover:text-black dark:hover:text-white transition flex items-center gap-1 font-mono"
+                      className="text-xs font-bold font-sans text-zinc-500 hover:text-black dark:hover:text-white transition flex items-center gap-1 cursor-pointer uppercase tracking-wider"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>Add URI</span>
@@ -543,7 +541,7 @@ export default function DeveloperConsolePage() {
                           <button
                             type="button"
                             onClick={() => handleRemoveUri(idx)}
-                            className="p-2 text-zinc-400 hover:text-red-500 transition shrink-0"
+                            className="p-2 text-zinc-400 hover:text-red-500 transition shrink-0 cursor-pointer"
                             title="Remove URI"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -561,7 +559,7 @@ export default function DeveloperConsolePage() {
                   <button
                     type="submit"
                     disabled={registering}
-                    className="w-full py-2.5 px-4 rounded-lg text-xs font-semibold uppercase tracking-wider bg-black text-white dark:bg-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 disabled:opacity-50 transition flex items-center justify-center gap-2"
+                    className="w-full py-3 px-4 rounded-lg text-xs font-bold font-sans uppercase tracking-wider bg-black text-white dark:bg-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 disabled:opacity-50 transition flex items-center justify-center gap-2 cursor-pointer shadow-xs"
                   >
                     {registering ? (
                       <>
@@ -586,7 +584,7 @@ export default function DeveloperConsolePage() {
             <button
               type="button"
               onClick={() => setCreatedCredentials(null)}
-              className="absolute top-4 right-4 p-1.5 rounded-lg text-zinc-400 hover:text-black dark:hover:text-white transition"
+              className="absolute top-4 right-4 p-1.5 rounded-lg text-zinc-400 hover:text-black dark:hover:text-white transition cursor-pointer"
               aria-label="Close"
             >
               <X className="w-4 h-4" />
@@ -596,7 +594,7 @@ export default function DeveloperConsolePage() {
               <div className="w-7 h-7 rounded-lg bg-black text-white dark:bg-white dark:text-black flex items-center justify-center">
                 <Check className="w-4 h-4" strokeWidth={2.5} />
               </div>
-              <h3 className="text-lg font-bold text-black dark:text-white">Credentials Provisioned</h3>
+              <h3 className="text-lg font-bold text-black dark:text-white font-sans">Credentials Provisioned</h3>
             </div>
 
             <div className="p-3 rounded-lg border border-amber-300 dark:border-amber-700/60 bg-amber-50 dark:bg-amber-950/30 text-amber-900 dark:text-amber-200 text-xs flex items-start gap-2.5 font-mono">
@@ -617,7 +615,7 @@ export default function DeveloperConsolePage() {
                 <button
                   type="button"
                   onClick={() => handleCopy(createdCredentials.clientId, "modal-client-id")}
-                  className="p-1 text-zinc-500 hover:text-black dark:hover:text-white ml-2"
+                  className="p-1 text-zinc-500 hover:text-black dark:hover:text-white ml-2 cursor-pointer"
                 >
                   {copiedKey === "modal-client-id" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                 </button>
@@ -634,7 +632,7 @@ export default function DeveloperConsolePage() {
                 <button
                   type="button"
                   onClick={() => handleCopy(createdCredentials.plainSecret, "modal-client-secret")}
-                  className="p-1 text-zinc-500 hover:text-black dark:hover:text-white ml-2"
+                  className="p-1 text-zinc-500 hover:text-black dark:hover:text-white ml-2 cursor-pointer"
                 >
                   {copiedKey === "modal-client-secret" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                 </button>
@@ -649,7 +647,7 @@ export default function DeveloperConsolePage() {
                   const envSnippet = `# Savelo IdP Integration\nSAVELO_IDP_ISSUER="http://localhost:3000"\nSAVELO_CLIENT_ID="${createdCredentials.clientId}"\nSAVELO_CLIENT_SECRET="${createdCredentials.plainSecret}"\nSAVELO_REDIRECT_URI="${createdCredentials.redirectUri}"\n`;
                   handleCopy(envSnippet, "modal-env-snippet");
                 }}
-                className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg border border-zinc-300 dark:border-white/15 text-xs font-mono text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-white/5 transition"
+                className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg border border-zinc-300 dark:border-white/15 text-xs font-bold font-sans uppercase tracking-wider text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-white/5 transition cursor-pointer"
               >
                 <Terminal className="w-3.5 h-3.5" />
                 <span>
@@ -669,14 +667,14 @@ export default function DeveloperConsolePage() {
                   setCreatedCredentials(null);
                   setActiveTab("playground");
                 }}
-                className="flex-1 py-2.5 px-4 rounded-lg text-xs font-semibold uppercase tracking-wider border border-zinc-300 dark:border-white/15 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-white/5 transition"
+                className="flex-1 py-2.5 px-4 rounded-lg text-xs font-bold font-sans uppercase tracking-wider border border-zinc-300 dark:border-white/15 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-white/5 transition cursor-pointer"
               >
                 Test in Playground
               </button>
               <button
                 type="button"
                 onClick={() => setCreatedCredentials(null)}
-                className="flex-1 py-2.5 px-4 rounded-lg text-xs font-semibold uppercase tracking-wider bg-black text-white dark:bg-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition"
+                className="flex-1 py-2.5 px-4 rounded-lg text-xs font-bold font-sans uppercase tracking-wider bg-black text-white dark:bg-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition cursor-pointer"
               >
                 Done
               </button>

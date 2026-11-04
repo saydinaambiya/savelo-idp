@@ -29,6 +29,10 @@ body {
   overflow-x: hidden;
 }
 
+button, [role="button"], a, input[type="submit"], input[type="button"], select {
+  cursor: pointer;
+}
+
 /* Hollow / Outlined Typography for Hero Headings (AppSecure aesthetic) */
 .text-stroke {
   -webkit-text-stroke: 1.5px currentColor;

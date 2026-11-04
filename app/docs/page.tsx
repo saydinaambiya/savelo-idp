@@ -141,19 +141,19 @@ async def exchange_token(auth_code: str, pkce_verifier: str):
                 Index
               </span>
               <a href="#overview" className="block text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition font-mono">
-                01. Overview
+                Overview
               </a>
               <a href="#client-registration" className="block text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition font-mono">
-                02. Client Registration
+                Client Registration
               </a>
               <a href="#auth-flow" className="block text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition font-mono">
-                03. PKCE Authorization Flow
+                PKCE Authorization Flow
               </a>
               <a href="#token-exchange" className="block text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition font-mono">
-                04. Token Exchange
+                Token Exchange
               </a>
               <a href="#endpoints" className="block text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition font-mono">
-                05. Endpoints
+                Standard Endpoints
               </a>
             </div>
           </aside>
@@ -165,7 +165,7 @@ async def exchange_token(auth_code: str, pkce_verifier: str):
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-zinc-500" />
                 <h2 className="text-lg font-bold uppercase tracking-wider text-black dark:text-white">
-                  1. Overview & Architecture
+                  Overview & Architecture
                 </h2>
               </div>
               <p className="text-xs font-mono text-zinc-600 dark:text-zinc-400 leading-relaxed">
@@ -198,7 +198,7 @@ async def exchange_token(auth_code: str, pkce_verifier: str):
               <div className="flex items-center gap-2">
                 <KeyRound className="w-5 h-5 text-zinc-500" />
                 <h2 className="text-lg font-bold uppercase tracking-wider text-black dark:text-white">
-                  2. Client Registration
+                  Client Registration
                 </h2>
               </div>
               <p className="text-xs font-mono text-zinc-600 dark:text-zinc-400 leading-relaxed">
@@ -225,7 +225,7 @@ async def exchange_token(auth_code: str, pkce_verifier: str):
               <div className="flex items-center gap-2">
                 <Lock className="w-5 h-5 text-zinc-500" />
                 <h2 className="text-lg font-bold uppercase tracking-wider text-black dark:text-white">
-                  3. PKCE Authorization Flow
+                  PKCE Authorization Flow
                 </h2>
               </div>
               <p className="text-xs font-mono text-zinc-600 dark:text-zinc-400 leading-relaxed">
@@ -256,7 +256,7 @@ async def exchange_token(auth_code: str, pkce_verifier: str):
               <div className="flex items-center gap-2">
                 <Terminal className="w-5 h-5 text-zinc-500" />
                 <h2 className="text-lg font-bold uppercase tracking-wider text-black dark:text-white">
-                  4. Token Exchange & Rotation
+                  Token Exchange & Rotation
                 </h2>
               </div>
               <p className="text-xs font-mono text-zinc-600 dark:text-zinc-400 leading-relaxed">
@@ -314,7 +314,7 @@ async def exchange_token(auth_code: str, pkce_verifier: str):
               <div className="flex items-center gap-2">
                 <Layers className="w-5 h-5 text-zinc-500" />
                 <h2 className="text-lg font-bold uppercase tracking-wider text-black dark:text-white">
-                  5. Standard Endpoints Reference
+                  Standard Endpoints
                 </h2>
               </div>
               <div className="border border-zinc-200 dark:border-white/10 rounded-xl overflow-hidden font-mono text-xs">
