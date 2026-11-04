@@ -19,6 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - GitHub Actions CI/CD workflows for PR quality checks, automated Vercel Preview deployments with PR commenting, and automated Vercel Production deployment on merge to `main`.
 - Pull Request template and CI/CD policy documentation (`docs/CICD.md`).
 
+### Fixed
+- Fixed TypeScript type error in `app/layout.tsx` by replacing undeclared `LayoutProps` with standard `Readonly<{ children: React.ReactNode }>`.
+
 ---
 
 ## [0.1.0] - 2026-11-04
