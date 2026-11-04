@@ -193,11 +193,15 @@ export default function DeveloperConsolePage() {
         <div className="pb-8 border-b border-zinc-200 dark:border-white/10">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight font-sans">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-zinc-300 dark:border-white/15 bg-zinc-100 dark:bg-white/5 text-[11px] font-mono tracking-widest text-zinc-700 dark:text-zinc-300 uppercase mb-3">
+                <Terminal className="w-3.5 h-3.5" />
+                <span>Developer Console</span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight font-sans">
                 <span className="text-stroke font-black">DEVELOPER</span>{" "}
                 <span className="text-black dark:text-white">CONSOLE</span>
               </h1>
-              <p className="mt-1 text-xs font-mono text-zinc-500">
+              <p className="mt-2 text-xs font-mono text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
                 Self-service client provisioning & real-time OAuth 2.0 PKCE testing sandbox.
               </p>
             </div>
