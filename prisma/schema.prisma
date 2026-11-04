@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email     String?   @unique
+  phone     String?   @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  sessions  Session[]
+
+  @@map("users")
+}
+
+model ClientApp {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String    // e.g. "Savelo Tools", "Saveroute"
+  clientId     String    @unique
+  clientSecret String    // Hashed secret
+  redirectUris String[]  // Whitelisted callback URLs
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  sessions     Session[]
+
+  @@map("client_apps")
+}
+
+// Note: Ephemeral AuthRequest and PKCE state are stored in Redis per ADR-001
+
+model Session {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId       String    @db.Uuid
+  clientId     String
+  familyId     String    @db.Uuid // Token Family UUID for Refresh Token Rotation & breach revocation
+  refreshToken String    @unique // Hashed refresh token
+  userAgent    String?
+  ipAddress    String?
+  expiresAt    DateTime
+  createdAt    DateTime  @default(now())
+
+  user   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  client ClientApp @relation(fields: [clientId], references: [clientId])
+
+  @@index([userId])
+  @@index([familyId])
+  @@map("sessions")
+}

@@ -34,3 +34,20 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Versioning & Changelog
+
+This project strictly adheres to [Semantic Versioning 2.0.0](https://semver.org/) and [Keep a Changelog](https://keepachangelog.com/):
+- **Changelog**: View release notes and ongoing updates in [CHANGELOG.md](CHANGELOG.md).
+- **Versioning Policy**: Read the complete specification in [docs/VERSIONING.md](docs/VERSIONING.md).
+
+## CI/CD & Deployment
+
+- **Pipeline & PR Policy**: See complete workflow details in [docs/CICD.md](docs/CICD.md).
+- **Automated Workflow**:
+  - Every Pull Request automatically runs **Lint**, **Typecheck**, **Unit Tests**, and deploys an isolated **Vercel Preview Deployment**.
+  - A GitHub bot automatically comments with the live preview link on the PR for immediate review.
+  - Merging to `main` triggers automated production deployment to Vercel.
+
+
+
