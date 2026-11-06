@@ -1,53 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Savelo Identity Provider (IdP)
+
+Savelo IdP is a centralized, enterprise-grade Identity Provider and OpenID Connect (OIDC) / OAuth 2.0 authorization server engineered for the Savelo multi-application ecosystem (Savelo Tools, Savetable, Saveroute, and third-party integrations).
+
+---
+
+## Centralized Documentation Hub
+
+> **For Engineers & AI Coding Agents:**  
+> Detailed architecture, cryptographic specifications, database schemas, and API contracts are centralized in the [`/docs`](docs/README.md) directory. Read the documentation hub before modifying or scanning the codebase:
+>
+> **[Read the Documentation Hub (`docs/README.md`)](docs/README.md)**
+
+### Key Documentation Sections:
+- **[Architecture Overview](docs/architecture/overview.md):** System topology, core directives, and approved ADR-001.
+- **[Security & Cryptography](docs/architecture/security-and-crypto.md):** RS256 token signing, HMAC-SHA256 OTP hashing, PKCE S256, Refresh Token Rotation (RTR), and constant-latency anti-enumeration.
+- **[Database Schema & Ephemeral State](docs/database/schema-and-state.md):** PostgreSQL Prisma models (`User`, `ClientApp`, `Session`) and Redis state machine.
+- **[Zero-Password Auth Flow](docs/flows/authentication.md):** OTP generation, Magic Link scanner evasion, and real-time cross-device SSE synchronization.
+- **[OAuth 2.0 & OIDC Flow](docs/flows/oauth-oidc.md):** PKCE authorization, authorization code exchange, token rotation, and token revocation.
+- **[API Reference](docs/api/reference.md):** Complete specifications for all API routes and response schemas.
+- **[Development Setup](docs/development/setup-and-workflow.md):** Docker Compose setup, database migrations, seeding, and environment variables.
+- **[CI/CD & Deployment](docs/development/cicd.md):** GitHub Actions quality gates and Vercel Option B prebuilt deployment.
+- **[Versioning & Changelog](docs/development/versioning.md):** SemVer 2.0.0 guidelines and Conventional Commits.
+
+---
+
+## Core Features
+
+- **Zero Passwords:** Numeric 6-digit OTPs (salted with server pepper) and high-entropy 32-byte Magic Links.
+- **RFC 7636 PKCE:** Mandatory Proof Key for Code Exchange with SHA-256 challenges on all authorization requests.
+- **Refresh Token Rotation (RTR):** Token Family tracking with immediate automatic revocation on replay detection.
+- **Cross-Device SSE Sync:** Verify on a mobile device and instantly complete login on desktop via Redis Pub/Sub and Server-Sent Events.
+- **Asymmetric RS256 Tokens:** Standard OIDC discovery (`/.well-known/openid-configuration`) and JWKS (`/.well-known/jwks.json`).
+- **Developer Console:** Interactive client application registration and PKCE testing sandbox at `/console`.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Prerequisites
+- Node.js 20+
+- Docker & Docker Compose
 
+### 2. Quickstart
 ```bash
+# Install dependencies
+npm ci
+
+# Start local PostgreSQL and Redis containers
+npm run db:up
+
+# Provision database schema & seed initial client apps
+npm run db:setup
+
+# Run core verification tests
+npm test
+
+# Start Next.js development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the homepage or [http://localhost:3000/console](http://localhost:3000/console) for the Developer Console.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Quality Gate Checklist
 
-## Learn More
+Before submitting pull requests, ensure all checks pass:
+```bash
+npm run lint        # ESLint 9 checks
+npm run typecheck   # TypeScript tsc --noEmit
+npm test            # Cryptographic core test suite
+npm run build       # Next.js build verification
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Versioning & Governance
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Versioning & Changelog
-
-This project strictly adheres to [Semantic Versioning 2.0.0](https://semver.org/) and [Keep a Changelog](https://keepachangelog.com/):
-- **Changelog**: View release notes and ongoing updates in [CHANGELOG.md](CHANGELOG.md).
-- **Versioning Policy**: Read the complete specification in [docs/VERSIONING.md](docs/VERSIONING.md).
-
-## CI/CD & Deployment
-
-- **Pipeline & PR Policy**: See complete workflow details in [docs/CICD.md](docs/CICD.md).
-- **Automated Workflow**:
-  - Every Pull Request automatically runs **Lint**, **Typecheck**, **Unit Tests**, and deploys an isolated **Vercel Preview Deployment**.
-  - A GitHub bot automatically comments with the live preview link on the PR for immediate review.
-  - Merging to `main` triggers automated production deployment to Vercel.
-
-
-
+- **Changelog:** All changes are maintained in [CHANGELOG.md](CHANGELOG.md) adhering to [Keep a Changelog](https://keepachangelog.com/).
+- **Semantic Versioning:** Strictly follows [SemVer 2.0.0](https://semver.org/) per [docs/development/versioning.md](docs/development/versioning.md).
+- **CI/CD Pipeline:** Detailed in [docs/development/cicd.md](docs/development/cicd.md).
+- **Strict English Repository:** All code, comments, documentation, and commit messages must be in English (see [AGENTS.md](AGENTS.md)).
+- **Zero-Emoji UI:** Vector iconography only (`lucide-react`).

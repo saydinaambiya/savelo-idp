@@ -8,27 +8,50 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email     String?   @unique
-  phone     String?   @unique
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  sessions  Session[]
+  id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email       String?      @unique
+  phone       String?      @unique
+  givenName   String?
+  familyName  String?
+  active      Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  sessions    Session[]
+  clientUsers ClientUser[]
 
   @@map("users")
 }
 
 model ClientApp {
-  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name         String    // e.g. "Savelo Tools", "Saveroute"
-  clientId     String    @unique
-  clientSecret String    // Hashed secret
-  redirectUris String[]  // Whitelisted callback URLs
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String       // e.g. "Savelo Tools", "Saveroute"
+  clientId     String       @unique
+  clientSecret String       // Hashed secret
+  scimToken    String?      @unique // Hashed SCIM Bearer token for server-to-server SCIM sync
+  redirectUris String[]     // Whitelisted callback URLs
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
   sessions     Session[]
+  clientUsers  ClientUser[]
 
   @@map("client_apps")
+}
+
+model ClientUser {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId    String    @db.Uuid
+  clientId  String
+  role      String    @default("member")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  user   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  client ClientApp @relation(fields: [clientId], references: [clientId], onDelete: Cascade)
+
+  @@unique([userId, clientId])
+  @@index([clientId])
+  @@index([userId])
+  @@map("client_users")
 }
 
 // Note: Ephemeral AuthRequest and PKCE state are stored in Redis per ADR-001

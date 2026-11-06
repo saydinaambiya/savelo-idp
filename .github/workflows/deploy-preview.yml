@@ -15,6 +15,8 @@ permissions:
 jobs:
   deploy-preview:
     name: Deploy PR Preview to Vercel
+    # Skip deployment if secrets are not available (e.g. from forks)
+    if: ${{ secrets.VERCEL_TOKEN != '' && secrets.VERCEL_ORG_ID != '' && secrets.VERCEL_PROJECT_ID != '' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -28,6 +30,20 @@ jobs:
 
       - name: Install Dependencies
         run: npm ci
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Quality Gate (Lint, Typecheck & Tests)
+        run: |
+          npm run lint
+          npm run typecheck
+          npm test
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/savelo_idp?schema=public"
+          REDIS_URL: "redis://localhost:6379"
+          AUTH_PEPPER_SECRET: "ci-dummy-pepper-secret-32-chars-long"
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest

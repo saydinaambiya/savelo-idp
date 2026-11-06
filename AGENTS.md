@@ -8,6 +8,17 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
+## Centralized Documentation Mandate (Read Before Scanning Repo)
+- **AGENT WORKFLOW ACCELERATION:** When starting any task, DO NOT scan through the entire repository or exhaust tokens inspecting random files.
+- **CENTRAL ENTRYPOINT:** Always read [docs/README.md](file:///Users/saydina/Documents/repositories/savelo-idp/docs/README.md) first. It provides an authoritative blueprint:
+  - System architecture & ADR-001: [docs/architecture/overview.md](file:///Users/saydina/Documents/repositories/savelo-idp/docs/architecture/overview.md)
+  - Security, RS256, & RTR cryptography: [docs/architecture/security-and-crypto.md](file:///Users/saydina/Documents/repositories/savelo-idp/docs/architecture/security-and-crypto.md)
+  - PostgreSQL schema & Redis state machine: [docs/database/schema-and-state.md](file:///Users/saydina/Documents/repositories/savelo-idp/docs/database/schema-and-state.md)
+  - Zero-Password & OAuth PKCE lifecycles: [docs/flows/authentication.md](file:///Users/saydina/Documents/repositories/savelo-idp/docs/flows/authentication.md) & [docs/flows/oauth-oidc.md](file:///Users/saydina/Documents/repositories/savelo-idp/docs/flows/oauth-oidc.md)
+  - Complete API endpoint contracts: [docs/api/reference.md](file:///Users/saydina/Documents/repositories/savelo-idp/docs/api/reference.md)
+  - Local setup, Docker, env vars & tests: [docs/development/setup-and-workflow.md](file:///Users/saydina/Documents/repositories/savelo-idp/docs/development/setup-and-workflow.md)
+- Consulting `docs/README.md` first drastically speeds up task completion and eliminates redundant code exploration.
+
 ## UI Iconography Standards (Zero Emoji Policy)
 - **NO EMOJIS AS ICONS:** Never use emojis (e.g. 🔐, ⚠️, 🚀, ➔, ↗) as icons or visual markers in user interfaces.
 - **PROFESSIONAL VECTOR ICONS:** Always use vector icons from `lucide-react` with clean, simple, bold, and elegant aesthetics (e.g. `Lock`, `ShieldCheck`, `ArrowRight`, `ExternalLink`, `KeyRound`, `Smartphone`, `Mail`).
@@ -31,8 +42,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **Vercel Deployment Pipeline:** Refer to [docs/CICD.md](file:///Users/saydina/Documents/repositories/savelo-idp/docs/CICD.md). Every PR generates an isolated Vercel Preview deployment, and merging to `main` triggers automated production deployment.
 
 ## Repository Language Policy (Strict English Only)
-- **ALL ENGLISH REPOSITORY:** All files, documentation, code, inline comments, docstrings, commit messages, PR descriptions, issue templates, and workflow files across the entire codebase MUST be written exclusively in proper, professional English.
-- **NO BILINGUAL / NON-ENGLISH TEXT:** Never use Indonesian or mixed/bilingual text in any repository file. (Agent chat responses to the user may be in the user's preferred language, but any content committed or saved into the repository files must strictly be 100% proper English).
+- **ALL ENGLISH CODE & REPOSITORY:** All code, inline comments, docstrings, variable/type naming, files, documentation, commit messages, PR descriptions, and configuration across the entire codebase MUST be written exclusively in proper, professional English.
+- **NO BILINGUAL / NON-ENGLISH CODE OR COMMENTS:** Never write non-English text or mixed bilingual comments in any source file. (While agent conversation responses with the user may use the user's preferred language, any code written or modified in repository files must strictly be 100% proper English).
 
 
 

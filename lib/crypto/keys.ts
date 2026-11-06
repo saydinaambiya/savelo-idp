@@ -29,16 +29,31 @@ export async function getSigningKeys(): Promise<{
   const envPublicKey = process.env.JWT_PUBLIC_KEY;
 
   if (envPrivateKey && envPublicKey) {
-    const privPem = envPrivateKey.includes("-----BEGIN")
+    const rawPriv = envPrivateKey.includes("-----BEGIN")
       ? envPrivateKey
       : Buffer.from(envPrivateKey, "base64").toString("utf-8");
-    const pubPem = envPublicKey.includes("-----BEGIN")
+    const rawPub = envPublicKey.includes("-----BEGIN")
       ? envPublicKey
       : Buffer.from(envPublicKey, "base64").toString("utf-8");
+
+    // Normalize escaped newlines from environment variable configurations
+    const privPem = rawPriv.replace(/\\n/g, "\n");
+    const pubPem = rawPub.replace(/\\n/g, "\n");
 
     cachedPrivateKey = await importPKCS8(privPem, "RS256");
     cachedPublicKey = await importSPKI(pubPem, "RS256");
   } else {
+    const isBuildPhase =
+      process.env.NEXT_PHASE === "phase-production-build" ||
+      process.env.CI === "true" ||
+      process.env.npm_lifecycle_event === "build" ||
+      process.argv.some((arg) => arg.includes("build"));
+
+    if (process.env.NODE_ENV === "production" && !isBuildPhase) {
+      throw new Error(
+        "CRITICAL: JWT_PRIVATE_KEY and JWT_PUBLIC_KEY environment variables are required in production."
+      );
+    }
     // Generate RSA key pair in-memory (useful for local development and tests)
     const { privateKey, publicKey } = await generateKeyPair("RS256", {
       modulusLength: 2048,

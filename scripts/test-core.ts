@@ -3,10 +3,10 @@ import {
   generateSecureRandomToken,
   hashOtpWithPepper,
   timingSafeStringEqual,
-} from "../lib/crypto/hash";
-import { computePkceChallenge, verifyPkce } from "../lib/crypto/pkce";
-import { signAccessToken, signIdToken, verifyJwt } from "../lib/crypto/jwt";
-import { getPublicJwks } from "../lib/crypto/keys";
+} from "@/lib/crypto/hash";
+import { computePkceChallenge, verifyPkce } from "@/lib/crypto/pkce";
+import { signAccessToken, signIdToken, verifyJwt } from "@/lib/crypto/jwt";
+import { getPublicJwks } from "@/lib/crypto/keys";
 
 async function runTests() {
   console.log("=========================================");
