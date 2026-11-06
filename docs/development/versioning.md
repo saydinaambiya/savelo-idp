@@ -89,27 +89,18 @@ The [CHANGELOG.md](../../CHANGELOG.md) file adheres to [Keep a Changelog 1.1.0](
 
 ---
 
-## 4. Release Workflow
+## 4. Release Workflow (Automated via Google Release Please)
 
-When publishing a new release:
+Releases and SemVer tagging are automated using **Google Release Please** (`.github/workflows/release-please.yml`):
 
-1. **Determine the Next Version:**
-   - Review entries under `## [Unreleased]` to assess whether the release is `MAJOR`, `MINOR`, or `PATCH`.
-2. **Update `CHANGELOG.md`:**
-   - Convert `## [Unreleased]` into the new version header with the release date (`YYYY-MM-DD`):
-     ```markdown
-     ## [Unreleased]
+1. **Continuous Conventional Commits:**
+   - Write standard Conventional Commits (`feat:`, `fix:`, `perf:`, `feat!:`, `BREAKING CHANGE:`).
+2. **Automated Release PR Generation:**
+   - On every push/merge to `main`, the `release-please` action analyzes commit history since the last release tag.
+   - It automatically generates or updates an ongoing Release PR (e.g. `chore: release 0.2.0`) containing:
+     - Version bumps in `package.json` and `.release-please-manifest.json`.
+     - Changelog entries compiled into `CHANGELOG.md`.
+3. **Publishing the Release:**
+   - When ready to release, simply merge the Release PR into `main`.
+   - The action immediately creates the official Git tag (e.g. `v0.2.0`), publishes the GitHub Release with notes, and triggers production deployment.
 
-     ## [0.2.0] - 2026-11-10
-     ### Added
-     ...
-     ```
-3. **Update `package.json`:**
-   - Update the `"version"` field in `package.json` (or use `npm version <major|minor|patch> --no-git-tag-version`).
-4. **Tag and Push:**
-   ```bash
-   git add CHANGELOG.md package.json package-lock.json
-   git commit -m "chore(release): v0.2.0"
-   git tag -a v0.2.0 -m "Release v0.2.0"
-   git push origin main --tags
-   ```
