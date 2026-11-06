@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Shield, ExternalLink } from "lucide-react";
+import packageJson from "@/package.json";
 
 export function Footer() {
   return (
@@ -81,7 +82,7 @@ export function Footer() {
             <Link href="/console" className="hover:text-black dark:hover:text-white transition">
               Console
             </Link>
-            <span className="font-mono">v0.1.0</span>
+            <span className="font-mono">v{packageJson.version}</span>
           </div>
         </div>
       </div>

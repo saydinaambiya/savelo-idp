@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-06
+
 ### Added
 - Standardized SCIM v2.0 (RFC 7643 & RFC 7644) server implementation for cross-domain user provisioning and tenant isolation.
 - SCIM endpoints: `GET /api/scim/v2/ServiceProviderConfig`, `GET/POST /api/scim/v2/Users`, and `GET/PATCH/DELETE /api/scim/v2/Users/[id]`.
