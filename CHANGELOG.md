@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.3.0](https://github.com/saydinaambiya/savelo-idp/compare/v0.2.0...v0.3.0) (2026-11-06)
+
+
+### Features
+
+* **core:** implement centralized OAuth2/OIDC IdP with SemVer, CI/CD, and zero-password authentication ([f65b547](https://github.com/saydinaambiya/savelo-idp/commit/f65b54788c749f594a55889e319cedc111ed748b))
+* **scim:** implement SCIM v2.0 protocol for cross-domain user manage… ([2e3f456](https://github.com/saydinaambiya/savelo-idp/commit/2e3f4561aedad4b30155ced57cde21ba7b34b474))
+* **scim:** implement SCIM v2.0 protocol for cross-domain user management ([dccd82e](https://github.com/saydinaambiya/savelo-idp/commit/dccd82e26dc789b709fc07d1ba9c84a2f35a5978))
+* **ui:** implement B&W stealth theme, developer console, and docs portal ([ece7d28](https://github.com/saydinaambiya/savelo-idp/commit/ece7d28c4ddefa2806047eb82c60027e675e92b7))
+
+
+### Bug Fixes
+
+* **ci:** handle vercel credentials gracefully in deployment workflows ([7d9126d](https://github.com/saydinaambiya/savelo-idp/commit/7d9126d6ecad4fbadaacf0b4acdb074169f61cd3))
+* **ci:** handle vercel credentials gracefully in deployment workflows ([44580e0](https://github.com/saydinaambiya/savelo-idp/commit/44580e0ac3078b30ad78c19d8a6344243dcda5a2))
+* **types:** resolve LayoutProps type reference in RootLayout ([e6d4c8d](https://github.com/saydinaambiya/savelo-idp/commit/e6d4c8d02d55483ff0960974b9e2819de6ece835))
+
 ## [Unreleased]
 
 ## [0.2.0] - 2026-11-06
