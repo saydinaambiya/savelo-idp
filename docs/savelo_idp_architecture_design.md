@@ -1,5 +1,7 @@
 # Architecture Design Document: Savelo Centralized Identity Provider (IdP)
 
+> **Notice:** This document is part of the Savelo IdP centralized architecture documentation. For the modular architecture overview and index, refer to [docs/README.md](README.md) and [docs/architecture/overview.md](architecture/overview.md).
+
 ## 1. Architecture Overview & Objectives
 
 This system is designed as a Centralized Identity Provider (IdP) with global standards to serve a multi-application ecosystem (e.g., Savelo, Savetable, Saveroute, and future applications). The architecture adopts a **Zero Password Management** principle using a combination of **Magic Link** and **One-Time Password (OTP)** authentication. Interactions between the IdP and Client Applications are governed by OAuth 2.0 and OpenID Connect (OIDC) standards using the **Authorization Code with PKCE** flow.

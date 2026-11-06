@@ -13,6 +13,5 @@ export const prisma =
         : ["error"],
   });
 
-if (process.env.NODE_ENV !== "production") {
-  global.__prisma = prisma;
-}
+// Preserve instance in global scope to reuse connection pool across warm serverless invocations
+global.__prisma = prisma;

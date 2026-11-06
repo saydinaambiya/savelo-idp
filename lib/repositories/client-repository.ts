@@ -32,8 +32,10 @@ export class ClientRepository {
     clientId: string;
     rawSecret: string;
     redirectUris: string[];
+    scimToken?: string;
   }): Promise<ClientApp> {
     const hashedSecret = hashToken(data.rawSecret);
+    const hashedScimToken = data.scimToken ? hashToken(data.scimToken) : undefined;
 
     return prisma.clientApp.upsert({
       where: { clientId: data.clientId },
@@ -41,12 +43,14 @@ export class ClientRepository {
         name: data.name,
         clientSecret: hashedSecret,
         redirectUris: data.redirectUris,
+        ...(hashedScimToken ? { scimToken: hashedScimToken } : {}),
       },
       create: {
         name: data.name,
         clientId: data.clientId,
         clientSecret: hashedSecret,
         redirectUris: data.redirectUris,
+        scimToken: hashedScimToken,
       },
     });
   }
@@ -60,6 +64,7 @@ export class ClientRepository {
         id: true,
         name: true,
         clientId: true,
+        scimToken: true,
         redirectUris: true,
         createdAt: true,
         updatedAt: true,
@@ -76,14 +81,17 @@ export class ClientRepository {
     clientId: string;
     rawSecret: string;
     redirectUris: string[];
+    scimToken?: string;
   }): Promise<ClientApp> {
     const hashedSecret = hashToken(data.rawSecret);
+    const hashedScimToken = data.scimToken ? hashToken(data.scimToken) : undefined;
 
     return prisma.clientApp.create({
       data: {
         name: data.name,
         clientId: data.clientId,
         clientSecret: hashedSecret,
+        scimToken: hashedScimToken,
         redirectUris: data.redirectUris,
       },
     });

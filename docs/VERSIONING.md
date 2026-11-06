@@ -1,5 +1,7 @@
 # Semantic Versioning & Changelog Guidelines
 
+> **Notice:** This document is mirrored in [docs/development/versioning.md](development/versioning.md). For the centralized documentation index, see [docs/README.md](README.md).
+
 This document outlines the versioning rules, commit conventions, and changelog maintenance standards for the **savelo-idp** project.
 
 ---

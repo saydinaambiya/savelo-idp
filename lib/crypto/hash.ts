@@ -2,6 +2,7 @@ import crypto from "crypto";
 
 const PEPPER =
   process.env.AUTH_PEPPER_SECRET ||
+  process.env.OTP_PEPPER_SECRET ||
   "default-dev-pepper-secret-must-be-changed-in-production-32-chars";
 
 /**

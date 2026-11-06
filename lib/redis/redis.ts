@@ -21,9 +21,8 @@ export function getRedisClient(): Redis {
     console.error("[Redis Error]:", err.message);
   });
 
-  if (process.env.NODE_ENV !== "production") {
-    global.__redisClient = client;
-  }
+  // Preserve client in global scope to reuse across warm serverless/Lambda invocations
+  global.__redisClient = client;
 
   return client;
 }

@@ -8,13 +8,14 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "tsx scripts/test-core.ts",
+    "test": "tsx scripts/test-core.ts && tsx scripts/test-scim.ts",
     "postinstall": "prisma generate",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down",
     "db:logs": "docker compose logs -f",
     "db:setup": "docker compose up -d && npx prisma db push && npm run db:seed",
-    "db:seed": "tsx scripts/seed.ts"
+    "db:seed": "tsx scripts/seed.ts",
+    "generate:keys": "tsx scripts/generate-keys.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",

@@ -3,14 +3,54 @@ name: Vercel Production Deployment
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 concurrency:
   group: vercel-production
   cancel-in-progress: false
 
 jobs:
+  quality-gate:
+    name: Verify Quality Gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Lint Code
+        run: npm run lint
+
+      - name: Typecheck TypeScript
+        run: npm run typecheck
+
+      - name: Run Core Tests
+        run: npm test
+
+      - name: Verify Next.js Build
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/savelo_idp?schema=public"
+          REDIS_URL: "redis://localhost:6379"
+          JWT_PRIVATE_KEY: ""
+          JWT_PUBLIC_KEY: ""
+          AUTH_PEPPER_SECRET: "ci-dummy-pepper-secret-32-chars-long"
+
   deploy-production:
     name: Deploy to Vercel Production
+    needs: quality-gate
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -27,6 +67,13 @@ jobs:
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
+
+      - name: Validate Vercel Secrets
+        run: |
+          if [ -z "${{ secrets.VERCEL_TOKEN }}" ] || [ -z "${{ secrets.VERCEL_ORG_ID }}" ] || [ -z "${{ secrets.VERCEL_PROJECT_ID }}" ]; then
+            echo "::error::Missing required Vercel secrets (VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID). Configure them in GitHub Repository Settings -> Secrets and variables -> Actions."
+            exit 1
+          fi
 
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
